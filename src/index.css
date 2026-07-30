@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: "Inter", "Cairo", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  [dir="rtl"] body {
+    font-family: "Cairo", "Inter", system-ui, sans-serif;
+  }
+  * {
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease;
+  }
+  .animate-slide-up {
+    animation: slideUp 0.3s ease;
+  }
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease;
+  }
+  .glow-green { box-shadow: 0 0 24px -4px rgba(16, 185, 129, 0.4); }
+  .glow-orange { box-shadow: 0 0 24px -4px rgba(249, 115, 22, 0.4); }
+  .glow-cyan { box-shadow: 0 0 24px -4px rgba(6, 182, 212, 0.4); }
+  .glow-purple { box-shadow: 0 0 24px -4px rgba(139, 92, 246, 0.4); }
+  .glow-red { box-shadow: 0 0 24px -4px rgba(244, 63, 94, 0.4); }
+  .glow-slate { box-shadow: 0 0 24px -4px rgba(220, 38, 38, 0.4); }
+  .glow-teal { box-shadow: 0 0 24px -4px rgba(20, 184, 166, 0.4); }
+  .glow-violet { box-shadow: 0 0 24px -4px rgba(217, 70, 239, 0.4); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.5);
+}
+
+/* Table integrity shield */
+.table-shield {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.table-shield table {
+  white-space: nowrap;
+}
+.table-shield td,
+.table-shield th {
+  white-space: nowrap;
+}
+.truncate-cell {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  @page {
+    margin: 12mm;
+    size: A4;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+  .print-area {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    background: white !important;
+    color: black !important;
+  }
+  .print-hide,
+  .print-hide * {
+    display: none !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-full-width {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .print-block {
+    display: block !important;
+  }
+  table {
+    width: 100% !important;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid #ccc !important;
+    padding: 6px 8px !important;
+    color: black !important;
+    font-size: 11px !important;
+  }
+  .print-area h1, .print-area h2, .print-area h3 {
+    color: black !important;
+  }
+}
+
+/* Thermal receipt print */
+@media print and (max-width: 80mm) {
+  @page {
+    margin: 2mm;
+    size: 80mm auto;
+  }
+  .receipt-print {
+    width: 80mm !important;
+    font-size: 10px !important;
+  }
+}
